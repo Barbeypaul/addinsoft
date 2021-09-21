@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row mt-5 mb-5 flex items-center ">
+  <div class="flex flex-row mt-5 mb-5 flex items-center">
     <p class="text-gray-600 m-1 font-semibold text-md">Row :</p>
     <div class="custom-number-input h-10 w-32 mr-5">
       <div
@@ -13,6 +13,7 @@
           shadow-2xl
         "
       >
+        <!-- Au clic on exécute la fonction moinsRow -->
         <button
           @click="moinsRow()"
           class="
@@ -50,6 +51,7 @@
           "
           name="custom-input-number"
         />
+        <!-- Au clic on exécute  la fonction plusRow -->
         <button
           @click="plusRow()"
           class="
@@ -80,6 +82,7 @@
           shadow-2xl
         "
       >
+        <!-- Au clic on exécute  la fonction moinsCol -->
         <button
           @click="moinsCol()"
           class="
@@ -117,6 +120,7 @@
           "
           name="custom-input-number"
         />
+        <!-- Au clic on exécute  la fonction plusCol -->
         <button
           @click="plusCol()"
           class="
@@ -134,6 +138,7 @@
         </button>
       </div>
     </div>
+    <!-- On bloque le bouton si col et row sont égal a 0-->
     <button
       class="
         h-10
@@ -152,6 +157,7 @@
       Générer
       <i class="fas fa-table"></i>
     </button>
+    <!-- si non -->
     <button
       class="
         h-10
@@ -170,7 +176,11 @@
       Générer
       <i class="fas fa-table"></i>
     </button>
+    <!--  si col et row sont égal a 0-->
+
     <div v-if="col === 0 || row === 0"></div>
+    <!--  si non  on affiche le bouton Supprimer-->
+    <!-- Au clic on exécute la fonction SupprimerTabColRow -->
     <button
       v-else
       class="
@@ -194,10 +204,18 @@
 
 <script>
 export default {
+  /**
+   * props : Founction pour génerer le tableau
+   * props : Founction pour Supprimer le tableau
+   */
   props: {
     genererTab: { type: Function },
     SupprimerTout: { type: Function },
   },
+  /**
+   * state col : conteur nombre de colonnes
+   * state row : conteur nombre de lignes
+   */
   data() {
     return {
       col: 0,
@@ -205,9 +223,10 @@ export default {
     };
   },
   methods: {
+    // Fonctions pour incrémenter et décrémenter les conteurs col et row
     plusRow() {
       if (this.row <= 14) {
-        this.row++;
+        return this.row++;
       }
     },
     moinsRow() {
@@ -225,6 +244,10 @@ export default {
         this.col--;
       }
     },
+    /**
+     * Supprimer contenu du tableau
+     * On exécute la fonction props SupprimerTout
+     */
     SupprimerTabColRow() {
       this.col = 0;
       this.row = 0;
